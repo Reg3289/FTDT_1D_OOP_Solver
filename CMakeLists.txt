@@ -12,5 +12,17 @@ set(CMAKE_CXX_EXTENSIONS OFF) # 禁用特定编译器的扩展，保证跨平台
 # 指定头文件的搜索路径
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+# ==========================================
+# 【新增】寻找并引入 OpenMP 库
+# ==========================================
+find_package(OpenMP REQUIRED)
+
 # 添加可执行文件目标，并将 src/main.cpp 作为源码编译
 add_executable(fdtd_1D_OOP_Solver src/main.cpp "include/Device.h")
+
+# ==========================================
+# 【新增】将 OpenMP 链接到我们的可执行文件
+# ==========================================
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(fdtd_1D_OOP_Solver PUBLIC OpenMP::OpenMP_CXX)
+endif()
