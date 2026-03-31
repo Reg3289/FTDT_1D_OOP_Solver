@@ -1,4 +1,5 @@
-build/
 out/
+build/
 *.csv
-.vscode
+*.exe
+.vs/
